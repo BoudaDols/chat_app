@@ -30,6 +30,11 @@ class AuthService {
     });
   }
 
+  Future<bool> isLoggedIn() async {
+    final session = await _storage.getUserSession();
+    return session?['is_logged_in'] ?? false;
+  }
+
   Future<UserCredentials?> getUserCredentials() async {
     final email = await _storage.getSecureData('user_email');
     final hashedPassword = await _storage.getSecureData('user_password');
@@ -52,11 +57,6 @@ class AuthService {
 
     // Clear session data
     await _storage.clearUserSession();
-  }
-
-  Future<bool> isLoggedIn() async {
-    final session = await _storage.getUserSession();
-    return session?['is_logged_in'] ?? false;
   }
 
   Future<Map<String, dynamic>> login(String email, String password) async {

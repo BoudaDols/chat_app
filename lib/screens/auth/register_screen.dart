@@ -1,3 +1,5 @@
+import 'package:chat_app/models/user_credentials.dart';
+import 'package:chat_app/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chat_app/providers/auth_provider.dart';
@@ -16,9 +18,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final AuthService _authService = AuthService();
   bool _isLoading = false;
 
   Future<void> _register() async {
+    UserCredentials userCredentials = UserCredentials(email: _emailController.text, hashedPassword: _passwordController.text, );
+
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
@@ -29,6 +34,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _emailController.text,
         _passwordController.text,
       );
+      await _authService.saveUserCredentials(userCredentials);
+      userCredentials = UserCredentials(email: '', hashedPassword: '');
       
       if (!mounted) return;
       Navigator.pushReplacement(

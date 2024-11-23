@@ -1,3 +1,4 @@
+import 'package:chat_app/models/user_credentials.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chat_app/providers/auth_provider.dart';
@@ -22,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthService _authService = AuthService();
 
   Future<void> _login() async {
+    UserCredentials userCredentials = UserCredentials(email: _emailController.text, hashedPassword: _passwordController.text);
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
@@ -31,6 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
         _emailController.text,
         _passwordController.text,
       );
+      await _authService.saveUserCredentials(userCredentials);
+      userCredentials = UserCredentials(email: '', hashedPassword: '');
       
       if (!mounted) return;
       Navigator.pushReplacement(
@@ -59,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
               MaterialPageRoute(builder: (_) => const ChatListScreen()),
             ),
           print(value),
-        });
+    });
   }
 
   @override

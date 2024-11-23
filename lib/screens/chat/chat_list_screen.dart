@@ -26,11 +26,16 @@ class _ChatListScreenState extends State<ChatListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chats'),
+        title: const Text('Chats',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold
+                          ),
+                      ),
+        centerTitle: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.add_outlined),
-            color: Colors.amber,
+            color: Colors.black,
             iconSize: 30.0,
             // onPressed: () => Provider.of<AuthProvider>(context, listen: false).logout(),
             onPressed: () => print("add a chat room"),

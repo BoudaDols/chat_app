@@ -17,12 +17,14 @@ class StorageService {
   // Encrypt data
   String _encryptData(String data) {
     final encrypter = encrypt.Encrypter(encrypt.AES(_key));
+    print(_iv.base64);
     return encrypter.encrypt(data, iv: _iv).base64;
   }
 
   // Decrypt data
   String _decryptData(String encryptedData) {
     final encrypter = encrypt.Encrypter(encrypt.AES(_key));
+    print(_iv.base64);
     return encrypter.decrypt64(encryptedData, iv: _iv);
   }
 
