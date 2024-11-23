@@ -48,11 +48,18 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
-  void initState() async {
+  void initState() {
     // TODO: implement initState
     super.initState();
-    // final bool result = _authService.isLoggedIn();
-    print(_authService.isLoggedIn());
+    final Future<bool> result = _authService.isLoggedIn();
+    result.then((value) => {
+          if(value)
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const ChatListScreen()),
+            ),
+          print(value),
+        });
   }
 
   @override
