@@ -15,8 +15,8 @@ class ChatProvider with ChangeNotifier {
 
   void initialize(String token) {
     _apiService.setToken(token);
-    _wsService.connect(token);
-    _wsService.setMessageHandler(_handleWebSocketMessage);
+    // _wsService.connect(token);
+    // _wsService.setMessageHandler(_handleWebSocketMessage);
     fetchChatRooms();
   }
 

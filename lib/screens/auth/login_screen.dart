@@ -5,6 +5,8 @@ import 'package:chat_app/screens/auth/register_screen.dart';
 import 'package:chat_app/screens/chat/chat_list_screen.dart';
 import 'package:chat_app/widgets/common/custom_button.dart';
 
+import '../../services/auth_service.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -17,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLoading = false;
+  final AuthService _authService = AuthService();
 
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
@@ -42,6 +45,14 @@ class _LoginScreenState extends State<LoginScreen> {
     } finally {
       setState(() => _isLoading = false);
     }
+  }
+
+  @override
+  void initState() async {
+    // TODO: implement initState
+    super.initState();
+    // final bool result = _authService.isLoggedIn();
+    print(_authService.isLoggedIn());
   }
 
   @override

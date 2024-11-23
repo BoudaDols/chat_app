@@ -29,7 +29,9 @@ class _ChatListScreenState extends State<ChatListScreen> {
         title: const Text('Chats'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.add_outlined),
+            color: Colors.amber,
+            iconSize: 30.0,
             onPressed: () => Provider.of<AuthProvider>(context, listen: false).logout(),
           ),
         ],
